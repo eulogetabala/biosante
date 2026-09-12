@@ -5,6 +5,15 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Le formulaire de rendez-vous est traité par Netlify Forms.
-# Ne pas ajouter @netlify/plugin-nextjs : l'adaptateur OpenNext est appliqué
-# automatiquement au build, et l'épingler désactiverait ses mises à jour.
+# L'adaptateur Next.js de Netlify (OpenNext) doit être déclaré explicitement.
+#
+# La documentation annonce une détection automatique, mais elle ne s'est pas
+# déclenchée sur ce site : le build a publié le dossier .next brut, sans créer
+# la moindre Function. Résultat, Netlify servait .next comme un site statique —
+# or il n'y a aucun index.html à sa racine — et toutes les routes répondaient 404.
+#
+# Le déclarer explicitement rend le montage déterministe et reproductible.
+# Contrepartie assumée : on renonce aux mises à jour automatiques de l'adaptateur.
+# Pour les réactiver, supprimer ce bloc et l'entrée dans package.json.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
