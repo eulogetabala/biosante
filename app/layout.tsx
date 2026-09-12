@@ -21,12 +21,32 @@ const jakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
+  // Nécessaire pour que og:image reçoive une URL absolue : les robots des
+  // réseaux sociaux n'acceptent pas de chemin relatif.
+  metadataBase: new URL(`https://${site.domain}`),
   title: {
     default: `${site.name} — ${site.tagline}`,
     template: `%s · ${site.name}`,
   },
   description:
     'Groupe Bio Santé Diagnostic : laboratoires d’analyses médicales à Brazzaville (Mpila et Cité Flamboyants), hématologie, microbiologie, biochimie et biologie moléculaire.',
+  // Le logo du groupe sert d'icône d'onglet. Les fichiers vivent dans app/ :
+  // Next.js les détecte, sert /icon.png et /apple-icon.png, et injecte les
+  // balises <link> correspondantes. Inutile de déclarer favicon.ico ici, Next.js
+  // l'ajoute déjà de son côté.
+  icons: {
+    icon: [{ url: '/icon.png', type: 'image/png', sizes: '512x512' }],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    siteName: site.name,
+    title: `${site.name} — ${site.tagline}`,
+    description:
+      'Laboratoires d’analyses médicales à Brazzaville : Mpila et Cité Flamboyants.',
+    images: [{ url: '/icon.png', width: 512, height: 512, alt: site.name }],
+  },
 }
 
 export const viewport: Viewport = {
