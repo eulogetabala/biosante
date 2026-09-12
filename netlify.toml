@@ -1,0 +1,10 @@
+[build]
+  command = "next build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Le formulaire de rendez-vous est traité par Netlify Forms.
+# Ne pas ajouter @netlify/plugin-nextjs : l'adaptateur OpenNext est appliqué
+# automatiquement au build, et l'épingler désactiverait ses mises à jour.

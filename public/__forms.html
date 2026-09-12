@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Formulaire — Bio Santé Diagnostic</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <!--
+      Ce fichier n'est jamais montré à personne.
+
+      Netlify Forms détecte les formulaires en lisant le HTML statique produit au
+      déploiement. Or les pages de Next.js (App Router) ne sont pas écrites en HTML
+      statique : elles sont pré-rendues puis servies depuis le cache Next. Sans ce
+      squelette, Netlify ne verrait aucun formulaire et les envois seraient perdus
+      en silence.
+
+      La liste des champs ci-dessous doit rester synchronisée avec le formulaire
+      réel (components/sections/AppointmentCard.tsx). Un champ manquant ici est
+      purement ignoré à la réception.
+    -->
+    <form name="rendez-vous" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="rendez-vous" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="email" name="email" />
+      <input type="text" name="service" />
+      <input type="text" name="labo" />
+      <input type="date" name="date" />
+      <input type="time" name="time" />
+      <input type="text" name="examens" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
