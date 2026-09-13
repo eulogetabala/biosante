@@ -257,9 +257,6 @@ label { @apply flex flex-col gap-2 text-xs font-bold uppercase tracking-[.12em];
 input, select { @apply w-full rounded-2xl border border-border bg-background px-4 py-3.5 text-sm font-normal tracking-normal text-foreground outline-none transition-colors; }
 textarea { @apply w-full rounded-2xl border border-border bg-background px-4 py-3.5 text-sm font-normal tracking-normal text-foreground outline-none transition-colors; }
 input:focus, select:focus, textarea:focus { border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 18%, transparent); }
-/* La liste des examens accepte plusieurs sélections : sa hauteur doit suivre son contenu. */
-[multiple] { height: auto; padding-block: .5rem; }
-[multiple] option { padding: .35rem .5rem; border-radius: .4rem; }
 /* Sélecteur de laboratoire : repère bleu, texte blanc. Le CSS ci-dessus étant hors
    layer, il primerait sur les utilitaires Tailwind — d'où ces règles dédiées. */
 .select-highlight,

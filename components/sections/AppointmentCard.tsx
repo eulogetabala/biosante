@@ -7,7 +7,6 @@ import { AlertCircle, ArrowRight, CheckCircle2, Loader2, ShieldCheck, X } from '
 import {
   countries,
   defaultCountry,
-  examGroups,
   flagEmoji,
   labos,
   services,
@@ -56,7 +55,8 @@ export function AppointmentCard() {
 
     setStatus('sending')
 
-    // Encodage explicite : gère aussi les champs à valeurs multiples (examens).
+    // Encodage explicite, champ par champ, plutôt qu'un envoi FormData brut :
+    // le corps envoyé reste ainsi un formulaire classique, ce qu'attend Netlify.
     const body = new URLSearchParams()
     formData.forEach((value, key) => {
       if (typeof value === 'string') body.append(key, value)
@@ -213,24 +213,6 @@ export function AppointmentCard() {
                   </select>
                 </label>
               </div>
-
-              <label className="mt-4">
-                Examens souhaités
-                <span className="mb-2 block text-xs font-normal text-muted-foreground">
-                  Maintenez Ctrl (ou Cmd) pour en choisir plusieurs.
-                </span>
-                <select multiple name="examens" size={5} className="h-auto">
-                  {examGroups.map((group) => (
-                    <optgroup key={group.name} label={group.name}>
-                      {group.items.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      ))}
-                    </optgroup>
-                  ))}
-                </select>
-              </label>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <label>
