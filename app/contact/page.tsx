@@ -38,10 +38,10 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact & rendez-vous"
         title="Parlons de votre santé."
-        text="Une question sur une analyse, un délai, une préparation ou un prélèvement à domicile ? Notre équipe vous répond du lundi au samedi."
+        text="Une question sur une analyse, un délai, une préparation ou un prélèvement à domicile ? Notre équipe vous répond 24h/24."
         image={heroImage}
         imageAlt="Accueil du laboratoire d’analyses médicales"
-        tags={['Lun → Sam', '07h30 – 18h00', 'Réponse rapide']}
+        tags={['Ouvert 24h/24', '7j/7', 'Réponse rapide']}
         cta={{ href: '#rendez-vous', label: 'Réserver un créneau' }}
       />
 
@@ -229,9 +229,9 @@ export default function ContactPage() {
               <div className="rounded-[1.9rem] border border-border bg-white p-7">
                 <Clock3 className="text-brand" size={20} />
                 <p className="mt-5 text-sm leading-7 text-muted-foreground">
-                  Nos deux sites sont ouverts du <span className="font-semibold text-foreground">
-                  lundi au samedi de 07h30 à 18h00</span>. Le dimanche, les urgences sont assurées
-                  sur appel.
+                  Nos deux sites sont ouverts <span className="font-semibold text-foreground">
+                  24h/24 et 7j/7</span>, sans interruption. Accueil et prélèvements sont assurés
+                  en continu, y compris les dimanches et jours fériés.
                 </p>
               </div>
             </div>

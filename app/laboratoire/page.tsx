@@ -73,7 +73,7 @@ const timeline = [
 const stats = [
   { value: '6', label: 'pôles d’expertise biologique' },
   { value: '2', label: 'laboratoires à Brazzaville' },
-  { value: '7h30', label: 'ouverture, du lundi au samedi' },
+  { value: '24/7', label: 'ouverture continue, jours fériés compris' },
   { value: '100%', label: 'échantillons tracés et horodatés' },
 ]
 

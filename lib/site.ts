@@ -29,8 +29,8 @@ export const labos: Labo[] = [
     landmark: 'Quartier Dragage — en diagonale de la Pharmacie Adèle',
     phone: '+242 06 763 7979',
     tel: '+242067637979',
-    hours: 'Lun → Sam · 07:30 – 18:00',
-    hoursNote: 'Dimanche : urgences sur appel',
+    hours: 'Ouvert 24h/24 · 7j/7',
+    hoursNote: 'Accueil et prélèvements en continu',
     maps: 'https://www.google.com/maps/search/?api=1&query=R%C3%A9sidence+Les+Pionniers+Brazzaville',
     image:
       'https://images.unsplash.com/photo-1583911860367-8b9fa77c6f4c?auto=format&fit=crop&w=1200&q=85',
@@ -45,8 +45,8 @@ export const labos: Labo[] = [
     landmark: 'Référence Hôpital Militaire',
     phone: '+242 06 765 7878',
     tel: '+242067657878',
-    hours: 'Lun → Sam · 07:30 – 18:00',
-    hoursNote: 'Dimanche : urgences sur appel',
+    hours: 'Ouvert 24h/24 · 7j/7',
+    hoursNote: 'Accueil et prélèvements en continu',
     maps: 'https://www.google.com/maps/search/?api=1&query=Avenue+de+la+Libert%C3%A9+Brazzaville',
     image:
       'https://images.unsplash.com/photo-1631816290138-9f0f79cada3b?auto=format&fit=crop&w=1200&q=85',
@@ -192,15 +192,27 @@ export const examGroups: ExamGroup[] = [
   },
 ]
 
-/** Créneaux de rendez-vous, groupés matin / après-midi. */
+/**
+ * Créneaux de rendez-vous, groupés par tranche horaire.
+ * Le laboratoire accueille 24h/24 : la journée est découpée en quatre plages
+ * plutôt qu'en matin / après-midi, pour que le choix reste lisible.
+ */
 export const timeSlotGroups = [
   {
-    label: 'Matin',
-    slots: ['07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30'],
+    label: 'Nuit (00h – 06h)',
+    slots: ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30'],
   },
   {
-    label: 'Après-midi',
+    label: 'Matin (06h – 12h)',
+    slots: ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30'],
+  },
+  {
+    label: 'Après-midi (12h – 18h)',
     slots: ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'],
+  },
+  {
+    label: 'Soir (18h – 24h)',
+    slots: ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30'],
   },
 ]
 
