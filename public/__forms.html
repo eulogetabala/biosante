@@ -7,23 +7,25 @@
   </head>
   <body>
     <!--
-      Ce fichier n'est jamais montré à personne.
+      Squelette de détection Netlify Forms.
 
-      Netlify Forms détecte les formulaires en lisant le HTML statique produit au
-      déploiement. Or les pages de Next.js (App Router) ne sont pas écrites en HTML
-      statique : elles sont pré-rendues puis servies depuis le cache Next. Sans ce
-      squelette, Netlify ne verrait aucun formulaire et les envois seraient perdus
-      en silence.
+      Netlify lit le HTML statique produit au déploiement : un <form> déclaré
+      dans un composant React (page pré-rendue puis servie par Next) lui est
+      invisible, et les envois échouent en silence. Ce fichier existe pour ça.
 
-      La liste des champs ci-dessous doit rester synchronisée avec le formulaire
-      réel (components/sections/AppointmentCard.tsx). Un champ manquant ici est
-      purement ignoré à la réception.
+      Les champs listés ici définissent ce que Netlify accepte de transmettre au
+      webhook sortant. Un champ absent de ce fichier est purement et simplement
+      ignoré à la réception.
+
+      En ajoutant un champ au formulaire, l'ajouter DANS LES DEUX FICHIERS :
+      ce squelette et components/sections/AppointmentCard.tsx.
     -->
     <form name="rendez-vous" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="rendez-vous" />
       <input type="text" name="bot-field" />
       <input type="text" name="name" />
       <input type="tel" name="phone" />
+      <input type="text" name="dial" />
       <input type="email" name="email" />
       <input type="text" name="service" />
       <input type="text" name="labo" />
