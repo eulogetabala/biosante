@@ -14,10 +14,15 @@ import {
 } from '@/lib/site'
 
 /**
- * Endpoint de réception Netlify Forms.
+ * Réception Netlify Forms.
+ *
  * Ce n'est pas une route Next : c'est le squelette statique `public/__forms.html`.
  * Netlify n'intercepte les envois que sur un fichier réellement statique — un POST
  * vers « / » serait capté par le rendu Next et la demande serait perdue.
+ *
+ * Netlify se charge de l'email d'alerte. Les données sont ensuite recopiées dans
+ * Firestore par un webhook sortant (`/api/forms`), ce qui alimente l'espace
+ * d'administration.
  */
 const NETLIFY_ENDPOINT = '/__forms.html'
 
@@ -123,6 +128,10 @@ export function AppointmentCard() {
             <form onSubmit={handleSubmit} className="max-w-xl">
               {/* Identité du formulaire, exigée par Netlify */}
               <input type="hidden" name="form-name" value="rendez-vous" />
+              {/* Indicatif d'appel, pour que le numéro WhatsApp du patient soit
+                  complet côté administration. Le menu ci-dessous ne transmet
+                  que l'indicatif quand le champ est hors de son <form>. */}
+              <input type="hidden" name="dial" value={dial} />
               {/* Piège à robots : invisible pour un humain */}
               <p className="hidden" aria-hidden="true">
                 <label>

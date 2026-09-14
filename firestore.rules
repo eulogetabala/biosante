@@ -1,0 +1,29 @@
+rules_version = '2';
+
+// Règles de sécurité Firestore — « mode production ».
+//
+// Ce fichier refuse tout accès depuis un navigateur ou un client mobile. Ce
+// n'est pas une restriction subie : c'est la politique du projet.
+//
+// L'application n'écrit et ne lit Firestore que depuis le serveur, via le SDK
+// d'administration. Or celui-ci s'authentifie avec un compte de service et
+// IGNORE ces règles — la documentation Firebase le confirme explicitement :
+// « les SDK d'administration peuvent toujours accéder à votre base ; utilisez
+// ces règles quand vous destinez Firestore à un usage serveur ».
+//
+// Autrement dit : le site public continue de fonctionner normalement, et
+// personne ne peut lire les données de santé depuis un client, même muni d'un
+// compte Firebase.
+//
+// À savoir avant d'élargir ces règles : dans Firestore, les `match` se
+// combinent par OU, pas par ET. Un `allow` ajouté quelque part suffit donc à
+// ouvrir un accès, et la règle générale ci-dessous ne l'annule pas. Le refus
+// par défaut vient des règles implicites de Firestore, pas de cette ligne.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
