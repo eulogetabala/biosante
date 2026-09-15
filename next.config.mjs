@@ -6,23 +6,25 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+
   /**
-   * `firebase-admin` est laissé hors du bundle serveur.
+   * Ne pas empaqueter ces paquets dans la Function Netlify.
    *
-   * Diagnostic : `/admin/login` répondait 500 en production, alors que cette
-   * page n'appelle Firebase par aucun chemin lorsqu'aucun cookie n'est présent —
-   * `currentAdmin()` renvoie `null` aussitôt. L'échec était donc au chargement du
-   * module, pas dans la logique : `lib/auth.ts` importe `firebase-admin`, et ce
-   * paquet ne survit pas à l'embarquement dans une fonction serverless.
+   * `firebase-admin` et son client gRPC ne sont pas de simples fichiers
+   * JavaScript : ils lisent `protos.json` sur le disque au moment de créer un
+   * client Firestore. Or Next.js, à la compilation, fond toutes les
+   * dépendances dans un seul fichier — et les fichiers `.json` lus par chemin
+   * relatif disparaissent alors du paquet. La Function échoue au premier appel,
+   * avec un message qui parle de `protos.json` introuvable, très loin de la
+   * cause réelle.
    *
-   * En local, l'illusion est parfaite : un seul processus Node, tout
-   * `node_modules` disponible, aucune erreur. Sous Netlify, chaque route est une
-   * fonction isolée et le SDK embarqué casse à l'initialisation.
+   * Les déclarer ici force Next.js à les laisser dans `node_modules` et à les
+   * résoudre à l'exécution : les fichiers annexes restent à leur place.
    *
-   * Déclarer le paquet ici le fait résoudre depuis `node_modules` à l'exécution
-   * au lieu d'être figé dans le bundle.
+   * `@grpc/grpc-js` est listé séparément car c'est lui qui porte `protos.json` :
+   * externaliser le parent ne suffit pas si l'enfant reste empaqueté.
    */
-  serverExternalPackages: ['firebase-admin'],
+  serverExternalPackages: ['firebase-admin', '@grpc/grpc-js'],
 }
 
 export default nextConfig
